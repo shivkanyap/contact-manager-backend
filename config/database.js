@@ -9,6 +9,6 @@ mongoose.connect(db,{ useNewUrlParser: true ,useUnifiedTopology: true })
 .catch(function(){
     console.log('error in connecting to db')
 })
-module.exprots={
+module.exports={
     mongoose
 }

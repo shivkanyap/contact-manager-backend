@@ -19,6 +19,40 @@ router.post('/register',function(req,res){
 })
 
 
+router.get('/',function(req,res){
+    
+    User.find()
+        .then(function(user){
+            res.send(user)
+        })
+        .catch(function(err){
+            res.send(err)
+        })
+})
+
+router.post('/login', function (req, res) {
+    const body = req.body
+    User.findOne({email:body.email, password:body.password})
+        .then(function (user) {
+            return user    
+        })
+        .catch(function (err) {
+            res.send(err)
+        })
+
+})
+// router.delete('/delete',function(req,res){
+//      User.findOneAndRemove({username:"kanya1"})
+//      .then(function (user) {
+//         return user    
+//     })
+//     .catch(function (err) {
+//         res.send(err)
+//     })
+
+// })
+
+
 module.exports={
     usersRouter:router
 }
