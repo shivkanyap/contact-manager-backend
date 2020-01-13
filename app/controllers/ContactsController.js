@@ -24,7 +24,7 @@ router.get('/',function(req,res){
         res.send(err)
     })
 })
-router.delete('/:id',  function (req, res) {
+router.delete('/:id', function (req, res) {
     const id = req.params.id
     Contact.findOneAndDelete({
         user: req.user._id, 
@@ -37,6 +37,26 @@ router.delete('/:id',  function (req, res) {
             res.send(err)
         })
 })
+
+router.put('/:id',function (req, res) {
+    const id = req.params.id
+    // const body = _.pick(req.body, ['name', 'email', 'mobile'])
+    const body=req.body
+    Contact.findOneAndUpdate({ _id: id, user: req.user._id}, body, { new: true, runValidators: true })
+        .then(function (contact) {
+            if (contact) {
+                res.send({
+                    contact,
+                    notice: 'successfully updated the contact'
+                })
+            } else {
+                res.status('404').send({})
+            }
+        })
+        .catch(function (err) {
+            res.send(err)
+        })
+    })
 
 module.exports={
     contactsRouter:router

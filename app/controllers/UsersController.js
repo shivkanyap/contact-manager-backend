@@ -32,9 +32,12 @@ router.get('/',function(req,res){
 
 router.post('/login', function (req, res) {
     const body = req.body
-    User.findOne({email:body.email, password:body.password})
+    User.findByCredentials(body.email, body.password)
         .then(function (user) {
-            return user    
+            return user.generateToken()
+        })
+        .then(function (token) {
+            res.send({ token })
         })
         .catch(function (err) {
             res.send(err)
