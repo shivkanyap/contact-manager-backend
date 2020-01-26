@@ -1,7 +1,7 @@
 const express=require('express')
 const {mongoose}=require('./config/database')
 const {usersRouter}=require('./app/controllers/UsersController')
-const {contactsRouter}=require('./app/controllers/ContactsController')
+const{ contactsRouter}=require('./app/controllers/ContactsController')
 const port=5000
 
 const app=express()

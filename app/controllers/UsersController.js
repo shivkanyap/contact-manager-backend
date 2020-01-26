@@ -1,4 +1,4 @@
-const express=require('express')
+    const express=require('express')
 const router=express.Router()
 const User=require('../models/User')
 
@@ -32,7 +32,9 @@ router.get('/',function(req,res){
 
 router.post('/login', function (req, res) {
     const body = req.body
-    User.findByCredentials(body.email, body.password)
+    User.findByCredentials(body
+        
+        .email, body.password)
         .then(function (user) {
             return user.generateToken()
         })

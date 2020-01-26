@@ -1,6 +1,6 @@
 const express=require('express')
 const router=express.Router()
-const {Contact}=require('../models/Contact')
+const Contact=require('../models/Contact')
 
 router.post('/addcontact',function(req,res){
     const body=req.body
@@ -24,25 +24,34 @@ router.get('/',function(req,res){
         res.send(err)
     })
 })
+
 router.delete('/:id', function (req, res) {
     const id = req.params.id
+    console.log(id)
     Contact.findOneAndDelete({
-        user: req.user._id, 
-        _id: id 
+        _id: id ,
+        user: req.user._id
+        
     })
         .then(function (contact) {
+            if(!contact)
+            {
+                res.json({})
+            }
             res.send(contact)
         })
         .catch(function (err) {
-            res.send(err)
+            res.json({ })
         })
 })
 
 router.put('/:id',function (req, res) {
     const id = req.params.id
+    console.log(id)
     // const body = _.pick(req.body, ['name', 'email', 'mobile'])
     const body=req.body
-    Contact.findOneAndUpdate({ _id: id, user: req.user._id}, body, { new: true, runValidators: true })
+    Contact.findOneAndUpdate({ id: id, user: req.user._id}, body, { new: true, runValidators: true })
+    console.log(_id)
         .then(function (contact) {
             if (contact) {
                 res.send({
