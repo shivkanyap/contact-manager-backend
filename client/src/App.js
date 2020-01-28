@@ -1,10 +1,11 @@
 import React from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 // import ContactList from './contacts/tableContact'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import Home from './components/Home'
 import List from './components/List'
 import Add from './components/Addcontact'
+import ContactShow from './components/Show'
 
 class App extends React.Component{
   
@@ -34,6 +35,7 @@ class App extends React.Component{
             <Route path="/" component={Home} exact={true} />
             <Route path="/contacts" component={List} exact={true}/>
             <Route path="/contacts/addcontact" component={Add} exact={true}/>
+            <Route path="/contacts/:id" component={ContactShow}/>
             </Switch>
             </BrowserRouter>
       </div>
