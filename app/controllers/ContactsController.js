@@ -1,6 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const Contact=require('../models/Contact')
+const _=require('lodash')
 
 router.post('/addcontact',function(req,res){
     const body=req.body
@@ -25,33 +26,47 @@ router.get('/',function(req,res){
     })
 })
 
-router.delete('/:id', function (req, res) {
-    const id = req.params.id
-    console.log(id)
-    Contact.findOneAndDelete({
-        _id: id ,
-        user: req.user._id
+// router.delete('/:id', function (req, res) {
+//     const id = req.params.id
+//     console.log(id)
+//     Contact.findOneAndDelete({
+//         _id: id ,
+//         user: req.user._id
         
-    })
-        .then(function (contact) {
-            if(!contact)
-            {
-                res.json({})
-            }
-            res.send(contact)
+//     })
+//         .then(function (contact) {
+//             if(!contact)
+//             {
+//                 res.json({})
+//             }
+//             res.send(contact)
+//         })
+//         .catch(function (err) {
+//             res.json({ })
+//         })
+// })
+router.delete('/delete',function(req,res){
+    const email=req.body.email
+
+    Contact.deleteOne({email:email})
+        .then(function(user){
+            res.send({user,notice:'this user deleted'})
         })
-        .catch(function (err) {
-            res.json({ })
+        .catch(function(){
+            res.send({user,notice:'this user deleted'})
         })
+
+
+
 })
 
-router.put('/:id',function (req, res) {
-    const id = req.params.id
-    console.log(id)
-    // const body = _.pick(req.body, ['name', 'email', 'mobile'])
-    const body=req.body
-    Contact.findOneAndUpdate({ id: id, user: req.user._id}, body, { new: true, runValidators: true })
-    console.log(_id)
+router.put('/:name',function (req, res) {
+    // const id = req.body.id
+    // console.log(id)
+    const body = _.pick(req.body, ['name', 'email', 'mobile'])
+    // const body=reqbody
+    Contact.findOneAndUpdate({ 'name':req.params.name}, body, { new: true, runValidators: true })
+    // console.log(_id)
         .then(function (contact) {
             if (contact) {
                 res.send({

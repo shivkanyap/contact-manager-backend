@@ -1,3 +1,4 @@
 {
-    "mongoURI":"mongodb+srv://kanya123:kanya123@devconnector-sytzh.mongodb.net/test?retryWrites=true&w=majority"
+    // "mongoURI":"mongodb+srv://kanya123:kanya123@devconnector-sytzh.mongodb.net/test?retryWrites=true&w=majority"
+   "mongoURI":"mongodb+srv://brad123:brad123@devconnector-9dtyf.mongodb.net/test?retryWrites=true&w=majority"
 }

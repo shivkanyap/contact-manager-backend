@@ -8,13 +8,13 @@ class List extends  React.Component
     {
         super(props)
         this.state={
-            contacts:[
-            ]
+            contacts:[]
         }
     }
     componentDidMount()
     {
-        axios.get('https://cors-anywhere.herokuapp.com/http://localhost:5000/contacts')
+        axios.get('http://localhost:5000/contacts')
+        // debugger;
         .then(response=>{
            console.log(response.data)
             this.setState(()=>({

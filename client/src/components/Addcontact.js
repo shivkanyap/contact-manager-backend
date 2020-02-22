@@ -11,7 +11,7 @@ class Add extends React.Component
   
     handleSubmit(formData){
         console.log('add the conatct')
-        axios.post("https://cors-anywhere.herokuapp.com/http://localhost:5000/contacts/addcontact", formData)
+        axios.post("http://localhost:5000/contacts", formData)
             .then(() => this.props.history.push('/contacts'))
             .catch(err => console.log(err))
     }
