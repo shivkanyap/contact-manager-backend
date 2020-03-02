@@ -4,9 +4,9 @@ import axios from  'axios'
 
 class ContactShow extends React.Component
 {
-    constructor()
-    {
-        super()
+    constructor(props)
+    {   
+        super(props)
         this.state={
             contact:{}
         }
@@ -16,7 +16,8 @@ class ContactShow extends React.Component
         const confirmDelete = window.confirm("Are you sure?")
         if(confirmDelete) {
             // api call to delete
-            axios.delete(`/contacts/${this.state.contact._id}`)
+            const id = this.props.match.params.id 
+            axios.delete(`https://localhost:5000/contacts/${id}`)
                 .then(() => this.props.history.push('/contacts'))
                 .catch(err => window.alert(err))
         }
@@ -24,7 +25,7 @@ class ContactShow extends React.Component
 
    componentDidMount() {
         const id = this.props.match.params.id 
-        axios.get(`/contacts/${id}`)
+        axios.get(`https://localhost:5000/contacts/${id}`)
             .then(response => this.setState(() => ({ contact: response.data })))
    }
 
@@ -36,9 +37,10 @@ class ContactShow extends React.Component
                 <h2>{this.state.name}</h2>
                 <h2>{this.state.mobile}</h2>
                 <h2>{this.state.email}</h2>
+                <Link to="/contacts">back</Link>
                 <Link to={`/contacts/edit/${this.state.contact._id}`}>edit</Link>
                 <button onClick={this.handledelete}>Delete</button>
-                <Link to="/contacts">back</Link>
+               
 
             </div>
         )

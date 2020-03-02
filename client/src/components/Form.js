@@ -42,11 +42,12 @@ class ContactForm extends React.Component
 
     handleSubmit=(e)=>
     {
-        e.preventDefault()
+        // e.preventDefault()
         const formData={
             name:this.state.name,
-            mobile:this.state.mobile,
-            email:this.state.email
+            
+            email:this.state.email,
+            mobile:this.state.mobile
            
         }
         this.props.handleSubmit(formData)
@@ -77,7 +78,7 @@ class ContactForm extends React.Component
                         email
                         <input type="text" value={this.state.email} onChange={this.handleEmail}/>
                     </label><br/>
-                    <input type="submit"/>
+                    <input type="submit" bgcolour="red"/>
                 </form>
 
             </div>

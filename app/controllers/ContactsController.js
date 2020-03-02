@@ -45,18 +45,54 @@ router.get('/',function(req,res){
 //             res.json({ })
 //         })
 // })
-router.delete('/delete',function(req,res){
-    const email=req.body.email
+router.delete('/:id',function(req,res){
+    const id=req.params.id
 
-    Contact.deleteOne({email:email})
-        .then(function(user){
-            res.send({user,notice:'this user deleted'})
+    Contact.findOneAndDelete({
+        _id:id,
+        // user:req.user._id
+    })
+        .then(function(contact){
+            if(contact){
+                res.send({
+                    contact,
+                    notice:'succesfully removed the contact'
+                })
+            }
+            else{
+                res.send('404').send({})
+            }
         })
-        .catch(function(){
-            res.send({user,notice:'this user deleted'})
+        .catch(function(err){
+            res.send(err)
         })
+           
+        
 
 
+
+})
+router.get('/:id',function(req,res){
+    const id=req.params.id
+    console.log(id)
+    Contact.findOne({
+        // user:req.user.id,
+    //  
+        
+        _id:id
+    
+    }).then(function(contact){
+        if(contact)
+        {
+            res.send(contact)
+        }
+        else{
+            res.send('404').send({})
+        }
+    })
+    .catch(function(err){
+        res.send(err)
+    })
 
 })
 
